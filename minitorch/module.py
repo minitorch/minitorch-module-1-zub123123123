@@ -67,7 +67,9 @@ class Module:
         """Enumerate over all the parameters of this module and its descendents."""
         # TODO: Implement for Task 0.4.
         # raise NotImplementedError("Need to implement for Task 0.4")
-        return list(enumerate(self.named_parameters()))
+        parameters = list(self._parameters.values()) +\
+            sum([module.parameters() for module in self._modules.values()], [])
+        return parameters
 
     def add_parameter(self, k: str, v: Any) -> Parameter:
         """Manually add a parameter. Useful helper for scalar parameters.
